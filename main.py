@@ -24,6 +24,7 @@ def main():
         pl.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60)/1000
+        pl.update(dt)
 
 if __name__ == "__main__":
     main()
