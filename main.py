@@ -4,6 +4,8 @@ os.environ["SDL_AUDIODRIVER"] = "dummy"
 import pygame
 import player
 import circleshape
+import asteroid
+import asteroidfield
 from constants import *
 
 def main():
@@ -14,12 +16,17 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    #create 2 groups for objects
+    #create groups for objects
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
     player.Player.containers = (updatable, drawable)
+    asteroid.Asteroid.containers = (asteroids, updatable, drawable)
+    asteroidfield.AsteroidField.containers = (updatable)
     #instantiate player
     pl = player.Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+    #instantiate asteroidfield
+    af = asteroidfield.AsteroidField()
     while(True):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
